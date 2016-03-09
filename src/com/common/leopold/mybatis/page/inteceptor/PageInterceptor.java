@@ -47,11 +47,11 @@ public class PageInterceptor implements Interceptor {
     public static Page endPage(){
         Page page=localPage.get();
         localPage.remove();
-        if(page.getPageNum()==1){
-            page.setHasPre(false);
+        if(page.getPageNum()!=1){
+            page.setHasPre(true);
         }
-        if(page.getPages()==page.getPageNum()){
-            page.setHasNext(false);
+        if(page.getPages()!=page.getPageNum()){
+            page.setHasNext(true);
         }
         return page;
     }

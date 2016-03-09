@@ -3,18 +3,20 @@ package com.common.leopold.mybatis.page.bean;
 import java.util.List;
 
 /**
+ * 分页page实体类
+ *
  * Created by IDEA
  * User:Leopold
  * Email:ylp_boy@126.com
  * Date:2015/11/22
  * Time:0:59
  */
-public class Page {
+public class Page<T> {
     private int pageNum;
     private int pageSize=10;
     private long total;
     private int pages;
-    private List result;
+    private List<T> result;
     private boolean hasNext;
     private boolean hasPre;
     public Page(){}
@@ -55,7 +57,7 @@ public class Page {
         this.pages = pages;
     }
 
-    public List getResult() {
+    public List<T> getResult() {
         return result;
     }
 

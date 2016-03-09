@@ -2,78 +2,84 @@ package com.common.leopold.poi;
 
 import com.common.leopold.poi.bean.ExcelColumnBean;
 import com.common.leopold.poi.util.PoiCommonUtils;
+import com.common.leopold.util.GenericsUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.*;
 
 import java.io.FileOutputStream;
-import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
+ * Collection导出Excel类
+ *
  * Created by IDEA
  * User:Leopold
  * Email:ylp_boy@126.com
  * Date:2015/12/21
  * Time:22:33
  */
-public class ExportExcel {
+public class ExportExcel<T> {
     private final static Logger logger=Logger.getLogger(ExportExcel.class);
-    private List dataset;
-    private List<ExcelColumnBean> columnList;
-    private String fileName;
-    private String path;
+    private Collection dataCollection;//数据集
+    private List<ExcelColumnBean> columnList;//实体类列属性集合
+    private String fileName;//导出文件名
+    private String path;//导出路径
+    private Class beanClass;//实体类
     public  ExportExcel(){}
-    public  ExportExcel(List dataset,Class beanClass,String fileName,String path){
-        this.dataset=dataset;
+    public  ExportExcel(Collection dataCollection,String fileName,String path){
+        this.dataCollection=dataCollection;
+        this.beanClass= GenericsUtils.getGenericType(this.getClass());
         this.columnList= PoiCommonUtils.getColumnBeanList(beanClass);
         this.fileName=fileName;
         this.path=path;
     }
-    public void export(){
+
+    /**
+     * 导出方法
+     */
+    public void export() throws Exception{
         HSSFWorkbook workbook = new HSSFWorkbook();
-        // 生成一个表格
+        // 生成一个sheet页
         HSSFSheet sheet = workbook.createSheet("sheet1");
-        HSSFRow row=null;
         sheet.autoSizeColumn(1);
-        HSSFCellStyle style1 = workbook.createCellStyle();
-        style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
-        setTitleFont(workbook,style1);
-        HSSFCellStyle style2 = workbook.createCellStyle();
-        style2.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
-        HSSFCell cell = null;
-        row=sheet.createRow(0);
+
+        //创建标题style
+        HSSFCellStyle titleStyle = workbook.createCellStyle();
+        titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+        setTitleFont(workbook,titleStyle);
+
+        //创建非标题的style
+        HSSFCellStyle noTitleStyle = workbook.createCellStyle();
+        noTitleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+
+        HSSFCell cell;
+        HSSFRow row=sheet.createRow(0);
         for(int i=0;i<columnList.size();i++){
             cell=row.createCell(i);
+            cell.setCellStyle(titleStyle);
             cell.setCellValue(columnList.get(i).getColumnName());
-            cell.setCellStyle(style1);
         }
-        for(int i=0;i<dataset.size();i++){
-            row=sheet.createRow(i+1);
+        int rowNum=1;
+        Iterator iterator=dataCollection.iterator();
+        if(iterator.hasNext()){
+            row=sheet.createRow(rowNum);
             for(int j=0;j<columnList.size();j++){
-                try {
-                    cell=row.createCell(j);
-                    Object value=columnList.get(j).getGetterMethod()
-                            .invoke(dataset.get(i), null);
-                    if(value==null){
-                        cell.setCellValue("");
-                    }else{
-                        cell.setCellValue(value.toString());
-                    }
-                    cell.setCellStyle(style2);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                cell=row.createCell(j);
+                cell.setCellStyle(noTitleStyle);
+                Object value=columnList.get(j).getGetterMethod()
+                        .invoke(iterator.next(), null);
+                if(value==null){
+                    cell.setCellValue("");
+                }else{
+                    cell.setCellValue(value.toString());
                 }
             }
         }
-        try {
-            FileOutputStream fout = new FileOutputStream(path+fileName+".xls");
-            workbook.write(fout);
-            fout.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FileOutputStream fout = new FileOutputStream(path+fileName+".xls");
+        workbook.write(fout);
+        fout.close();
     }
     private void setTitleFont(HSSFWorkbook wb,HSSFCellStyle style){
         HSSFFont font=wb.createFont();

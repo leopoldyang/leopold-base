@@ -1,5 +1,6 @@
 package com.common.leopold.mybatis.dao;
 
+import com.common.leopold.mybatis.exception.DaoException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
@@ -20,20 +21,29 @@ public class BaseDao {
     @Autowired
     private SqlSessionFactory factory;
     private SqlSession session;
-    public SqlSession getSession(){
+
+    /**
+     * 获取session
+     * @return
+     */
+    public SqlSession getSession() throws DaoException{
         if (factory == null) {
             logger.error("sqlSessionFactory is null!");
-            return null;
+            throw new DaoException("sqlSessionFactory is null");
         }
         session=factory.openSession();
         return session;
     }
-    public void closeSession(){
-        if(session!=null){
-            session.close();
-        }else{
+
+    /**
+     * 关闭session
+     */
+    public void closeSession() throws DaoException{
+        if(session==null){
             logger.error("session is null!");
+            throw new DaoException("session is null");
         }
+        session.close();
     }
 
     public SqlSessionFactory getFactory() {

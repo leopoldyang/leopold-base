@@ -3,6 +3,8 @@ package com.common.leopold.util;
 import java.util.Random;
 
 /**
+ * 简单获取编号
+ *
  * Created by IDEA
  * User:Leopold
  * Email:ylp_boy@126.com

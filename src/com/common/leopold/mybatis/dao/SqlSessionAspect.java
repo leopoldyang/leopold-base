@@ -23,7 +23,7 @@ public class SqlSessionAspect {
         try {
             Method method = jp.getTarget().getClass().getSuperclass().getMethod("closeSession");
             method.invoke(jp.getTarget());
-            logger.info("执行方法：" + jp.getSignature().getName() + "打开的session已关闭");
+            logger.info("执行方法：[" + jp.getSignature().getName() + "],打开的session已关闭");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

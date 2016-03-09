@@ -3,6 +3,7 @@ package com.common.leopold.poi.util;
 
 import com.common.leopold.poi.annotation.ExcelColumnName;
 import com.common.leopold.poi.bean.ExcelColumnBean;
+import com.common.leopold.util.TimeTools;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Excel导入与导出工具类
+ *
  * Created by IDEA
  * User:Leopold
  * Email:ylp_boy@126.com
@@ -57,6 +60,13 @@ public class PoiCommonUtils {
                 field.getName().substring(1);
     }
 
+    /**
+     * 类型装换类，将String转换为对应的类型
+     *
+     * @param type
+     * @param value
+     * @return
+     */
     public static Object parseType(Class type,String value){
         if(type.equals(String.class)){
             return value;
@@ -65,7 +75,7 @@ public class PoiCommonUtils {
         }else if(type.equals(Integer.class)){
             return Integer.parseInt(value);
         }else if(type.equals(Date.class)){
-            return new Date(value);
+            return TimeTools.parseYYYY_MM_DD(value);
         }
         return null;
     }

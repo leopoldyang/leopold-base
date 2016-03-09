@@ -125,7 +125,7 @@ public final class TimeTools {
      *
      * @param date
      * @param selectDate 想要获取的时间参数  以当天为例 -1表示前一天   +1表示后一天  0 表示 当天
-     * @Version1.0 2015-8-10 上午9:01:57 by 雷霆（leiting01@10101111.com）创建
+     * @Version1.0
      */
     public static void setEndDay(Date date, int selectDate) {
         if (date == null) {
@@ -146,7 +146,7 @@ public final class TimeTools {
      *
      * @param date
      * @param selectDate 想要获取的时间参数  以当天为例 -1表示前一天   +1表示后一天  0 表示 当天
-     * @Version1.0 2015-8-10 上午9:01:57 by 雷霆（leiting01@10101111.com）创建
+     * @Version1.0
      */
     public static void setStartDay(Date date, int selectDate) {
         if (date == null) {
@@ -169,7 +169,7 @@ public final class TimeTools {
      * @param date       需要设置的日期
      * @param selectDate 需要设置的天数
      * @return
-     * @Version1.0 2015-8-25 上午10:42:57 by 雷霆（leiting01@10101111.com）创建
+     * @Version1.0
      */
     public static boolean setSomeDay0H0M0S(Date date, Integer selectDate) {
         Calendar calendar = getCalendar();
@@ -301,7 +301,7 @@ public final class TimeTools {
      * Description: 获取当前月份
      *
      * @return
-     * @Version1.0 2015-7-21 下午8:23:03 by 陈永旺（yw.chen02@10101111.com）创建
+     * @Version1.0
      */
     public static int getCurrentMonth(Date date) {
         GregorianCalendar g = new GregorianCalendar();
@@ -315,7 +315,7 @@ public final class TimeTools {
      * Description: 获取指定日期为星期几（星期日为1，星期六为7）
      *
      * @return
-     * @Version1.0 2015-7-21 下午8:23:05 by 陈永旺（yw.chen02@10101111.com）创建
+     * @Version1.0
      */
     public static int getWeekByDate(Date date) {
         GregorianCalendar g = new GregorianCalendar();
@@ -331,7 +331,7 @@ public final class TimeTools {
      * @param inDate
      * @param dayNum
      * @return
-     * @Version1.0 2015-8-3 下午4:53:07 by 陈永旺（yw.chen02@10101111.com）创建
+     * @Version1.0
      */
     public static Date getDateAfterNum(Date inDate, int dayNum) {
         Calendar calendar = getCalendar();
@@ -346,7 +346,7 @@ public final class TimeTools {
      * @param date
      * @param selectDate 想要获取的时间参数  以当天为例 -1表示前一天   +1表示后一天  0 表示 当天
      * @return
-     * @Version1.0 2015-8-26 上午9:30:56 by 杨利鹏（lpyang@10101111.com）创建
+     * @Version1.0
      */
     public static Date getStartDay(Date date, int selectDate) {
 

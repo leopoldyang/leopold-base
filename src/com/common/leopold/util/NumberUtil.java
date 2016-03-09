@@ -35,7 +35,7 @@ public final class NumberUtil {
      *
      * @param value
      * @return
-     * @Version1.0 2015-9-9 上午9:45:51 by 杨利鹏（lpyang@10101111.com）创建
+     * @Version1.0
      */
     public static Double isNull(Double value) {
         return value == null ? 0.0 : value;
@@ -205,7 +205,7 @@ public final class NumberUtil {
      * @param enDouble 被四舍五入值
      * @param rountNum 精确到的位数：如：0,保留整数；1，保留一位小数
      * @return
-     * @Version1.0 2015-7-31 下午12:03:05 by 陈永旺（yw.chen02@10101111.com）创建
+     * @Version1.0
      */
     public static Double roundDouble(Double enDouble, int rountNum) {
         if (enDouble == null) {
