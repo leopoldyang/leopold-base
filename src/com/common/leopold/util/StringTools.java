@@ -11,7 +11,7 @@ import java.util.List;
  * Created by leopold on 2015/6/29.
  */
 public final class StringTools {
-    private static final String CURRENT_PROJECT_PACKAGE_NAME = "com.ucar.cdms";
+    private static final String CURRENT_PROJECT_PACKAGE_NAME = "com.common.leopold";
 
     public static String getStatementParameter(String str, Object... objects) {
         if (!isBlank(str)) {

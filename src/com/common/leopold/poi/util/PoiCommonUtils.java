@@ -70,11 +70,11 @@ public class PoiCommonUtils {
     public static Object parseType(Class type,String value){
         if(type.equals(String.class)){
             return value;
-        }else if(type.equals(Double.class)){
+        }else if(type.isAssignableFrom(Double.class)){
             return Double.parseDouble(value);
-        }else if(type.equals(Integer.class)){
+        }else if(type.isAssignableFrom(Integer.class)){
             return Integer.parseInt(value);
-        }else if(type.equals(Date.class)){
+        }else if(type.isAssignableFrom(Date.class)){
             return TimeTools.parseYYYY_MM_DD(value);
         }
         return null;

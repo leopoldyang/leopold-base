@@ -8,3 +8,4 @@
 6、基于poi，对excel的导入和导出
 7、spring基于junit4测试的基类
 8、其它一些常用的工具类（时间工具类、线程工具类、集合工具类、number工具类等）
+9、基于spirng注解的hibernate数据库操作dao基类

@@ -3,14 +3,25 @@ package com.common.leopold.util;
 import java.util.*;
 
 /**
+ * 集合操作工具类
+ *
  * Created by leopold on 2015/06/02.
  */
 public final class CollectionsTools {
-
+    /**
+     * 创建长度与参数集合长度一样的arrayList
+     * @param collection
+     * @param <T>
+     * @return
+     */
     public static <T> ArrayList<T> createSameSize(Collection collection) {
         return new ArrayList<T>(size(collection));
     }
 
+    /**
+     * 移除map中键或值为空的键值对
+     * @param map
+     */
     public static void removeEmptyValue(Map map) {
         if (isNotEmpty(map)) {
             for (Object key : new HashSet<Object>(map.keySet())) {
@@ -24,6 +35,10 @@ public final class CollectionsTools {
         }
     }
 
+    /**
+     * 移除map中值为空的键值对
+     * @param map
+     */
     public static void removeNullValue(Map map) {
         if (isNotEmpty(map)) {
             for (Object key : new HashSet<Object>(map.keySet())) {
@@ -34,6 +49,14 @@ public final class CollectionsTools {
         }
     }
 
+    /**
+     * 将一个数组转为set
+     * @param fieldGetter
+     * @param arr
+     * @param <T>
+     * @param <O>
+     * @return
+     */
     public static <T, O> Set<T> getSet(FieldGetter<T, O> fieldGetter, O... arr) {
         if (isEmpty(arr))
             return new HashSet<T>(0);
@@ -44,6 +67,14 @@ public final class CollectionsTools {
         return set;
     }
 
+    /**
+     * arr集合中对象的一个属性提取出来转换为list
+     * @param arr
+     * @param fieldGetter
+     * @param <T>
+     * @param <O>
+     * @return
+     */
     public static <T, O> List<T> getList(List<O> arr, FieldGetter<T, O> fieldGetter) {
         if (isEmpty(arr))
             return new ArrayList<T>(0);
@@ -53,7 +84,14 @@ public final class CollectionsTools {
         }
         return list;
     }
-
+    /**
+     * arr集合中对象的一个属性提取出来转换为set
+     * @param arr
+     * @param fieldGetter
+     * @param <T>
+     * @param <O>
+     * @return
+     */
     public static <T, O> Set<T> getSet(List<O> arr, FieldGetter<T, O> fieldGetter) {
         if (isEmpty(arr))
             return new HashSet<T>(0);
@@ -64,6 +102,12 @@ public final class CollectionsTools {
         return set;
     }
 
+    /**
+     * 将一个数组转化为set
+     * @param arr
+     * @param <T>
+     * @return
+     */
     public static <T> Set<T> createSet(T... arr) {
         if (isEmpty(arr))
             return new HashSet<T>(0);

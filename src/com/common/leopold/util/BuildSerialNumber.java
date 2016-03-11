@@ -18,6 +18,12 @@ public class BuildSerialNumber {
     public static String getCurrentTime(){
         return String.valueOf(System.currentTimeMillis());
     }
+
+    /**
+     * 获取编号
+     * @param length 编号长度
+     * @return
+     */
     public static String getSimpleNo(int length){
         StringBuilder stringBuilder=new StringBuilder(getCurrentTime());
         for(int i=0;i<length-13;i++){
